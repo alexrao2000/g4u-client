@@ -1,7 +1,7 @@
 import 'react';
 import { useState } from 'react';
 import { useSearchParams } from "react-router-dom";
-import './Register.css';
+import '../css/Register.css';
 
 function Register() {
   const [searchParams] = useSearchParams();
