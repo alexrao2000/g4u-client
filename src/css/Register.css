@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  min-width: 20vw; /* Assures that container can't be narrower than the form, idk if the best solution, could be relative to form instead */
+  width: fit-content;
   padding: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
@@ -23,9 +25,23 @@
   text-align: center;
   color: #333;
   margin-bottom: 2rem;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 2;
   background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.register-code {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2;
+  background: rgb(87, 84, 84);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
