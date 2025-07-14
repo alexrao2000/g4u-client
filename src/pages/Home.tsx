@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getReferralCode } from '../api/referral';
 import '../css/Home.css';
 //import { useNavigate } from 'react-router-dom';
 
 function Home() {
-  const [referralCode] = useState<string>('ABC123'); // Placeholder
+  const [referralCode, setReferralCode] = useState<string>(''); // Placeholder
   const [copied, setCopied] = useState<boolean>(false);
 
-  const referralLink = `${window.location.origin}/register?ref=${referralCode}`;
+  let referralLink = `${window.location.origin}/register?ref=${referralCode}`;
+
+  const generateReferral = async () => {
+    const code = await getReferralCode()
+    console.log(code)
+    setReferralCode(code)
+  }
 
   const copyToClipboard = async () => {
     try {
@@ -18,9 +25,14 @@ function Home() {
     }
   };
 
+  useEffect(() => {
+    referralLink = `${window.location.origin}/register?ref=${referralCode}`;
+  }, [referralCode]);
+
   return (
     <div className="home-container">
       <div className="home-card">
+
         <h1 className="home-title">Your Referral Link</h1>
         
         <div className="referral-section">
@@ -33,13 +45,27 @@ function Home() {
           >
             {referralLink}
           </a>
-          
-          <button 
-            onClick={copyToClipboard}
-            className={`copy-button ${copied ? 'copied' : ''}`}
-          >
-            {copied ? 'Copied!' : 'Copy Link'}
-          </button>
+
+          {referralCode ? (
+
+            <button 
+              onClick={copyToClipboard}
+              className={`copy-button ${copied ? 'copied' : ''}`}
+            >
+              {copied ? 'Copied!' : 'Copy Link'}
+            </button>
+
+          ) : (
+
+            <button 
+              className={'copy-button'}
+              onClick={() => generateReferral()}
+            >
+              Generate Referral
+            </button>
+
+          )}
+
         </div>
         
         <p className="info-text">
