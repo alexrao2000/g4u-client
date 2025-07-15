@@ -3,7 +3,7 @@ import { getReferralCode } from '../api/referral';
 import '../css/Home.css';
 //import { useNavigate } from 'react-router-dom';
 
-function Home() {
+function Referral() {
   const [referralCode, setReferralCode] = useState<string>(''); // Placeholder
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -76,4 +76,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default Referral;
