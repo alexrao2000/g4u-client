@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getReferralCode } from '../api/referral';
 import '../css/Home.css';
 //import { useNavigate } from 'react-router-dom';
@@ -25,10 +25,6 @@ function Referral() {
     }
   };
 
-  useEffect(() => {
-    referralLink = `${window.location.origin}/register?ref=${referralCode}`;
-  }, [referralCode]);
-
   return (
     <div className="home-container">
       <div className="home-card">
@@ -36,24 +32,27 @@ function Referral() {
         <h1 className="home-title">Your Referral Link</h1>
         
         <div className="referral-section">
-          <span className="referral-label">Share this link with friends:</span>
-          <a 
-            href={referralLink} 
-            className="referral-link"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {referralLink}
-          </a>
 
           {referralCode ? (
+            
+            <div>
+              <span className="referral-label">Share this link with friends:</span>
+              <a 
+                href={referralLink} 
+                className="referral-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {referralLink}
+              </a>
 
-            <button 
-              onClick={copyToClipboard}
-              className={`copy-button ${copied ? 'copied' : ''}`}
-            >
-              {copied ? 'Copied!' : 'Copy Link'}
-            </button>
+              <button 
+                onClick={copyToClipboard}
+                className={`copy-button ${copied ? 'copied' : ''}`}
+              >
+                {copied ? 'Copied!' : 'Copy Link'}
+              </button>
+            </div>
 
           ) : (
 
