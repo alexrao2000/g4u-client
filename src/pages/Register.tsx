@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import '../css/Register.css';
 
+import { register } from '../api/auth';
+
 function Register() {
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get('ref');
@@ -13,6 +15,7 @@ function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(password, email) // DELETE THIS ONCE BACKEND IS IMPLEMENTED
+    register(password, email)
   }
 
   return (

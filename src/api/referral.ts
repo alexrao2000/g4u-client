@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { baseUrl } from '../constants';
 
 export async function getReferralCode(): Promise<string> {
-  const url = 'http://127.0.0.1:8000/referral-code'
+  const url = `${baseUrl}referral-code`
   
   const response = await axios.get(url, {
     method: "GET",
