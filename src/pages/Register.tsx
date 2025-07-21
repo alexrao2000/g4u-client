@@ -24,12 +24,16 @@ function Register() {
   return (
     <div className="register-container">
       <div className="register-form">
+
         {submitted ? (
           <h1 className="register-title"> Thank you for signing up!</h1>
         ) : (
           <>
             <h1 className="register-title">Sign Up</h1>
-            <h2 className="register-code">Your Referral Code is: {referralCode}</h2> {/* Make it optional */}
+            {referralCode && 
+              <h2 className="register-code">Your Referral Code is: {referralCode}</h2>
+            }
+
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input 
@@ -57,6 +61,7 @@ function Register() {
             </form>
           </>
         )}
+
       </div>
       
     </div>
