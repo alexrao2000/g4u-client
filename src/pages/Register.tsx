@@ -11,44 +11,54 @@ function Register() {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(password, email) // DELETE THIS ONCE BACKEND IS IMPLEMENTED
-    register(email, password)
+    const data = await register(email, password)
+    console.log(data)
+    setSubmitted(prev => !prev)
+
   }
 
   return (
     <div className="register-container">
       <div className="register-form">
-        <h1 className="register-title">Sign Up</h1>
-        <h2 className="register-code">Your Referral Code is: {referralCode}</h2> {/* Make it optional */}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input 
-              className="form-input"
-              type="email"
-              placeholder='Email'
-              value={email}
-              onChange={e => setEmail(e.target.value) /* we need to look at this */}
-              required
-            />
-          </div>
+        {submitted ? (
+          <h1 className="register-title"> Thank you for signing up!</h1>
+        ) : (
+          <>
+            <h1 className="register-title">Sign Up</h1>
+            <h2 className="register-code">Your Referral Code is: {referralCode}</h2> {/* Make it optional */}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input 
+                  className="form-input"
+                  type="email"
+                  placeholder='Email'
+                  value={email}
+                  onChange={e => setEmail(e.target.value) /* we need to look at this */}
+                  required
+                />
+              </div>
 
-          <div className="form-group">
-            <input
-              className="form-input"
-              type="password"
-              placeholder='Password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
-          </div>
+              <div className="form-group">
+                <input
+                  className="form-input"
+                  type="password"
+                  placeholder='Password'
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                />
+              </div>
 
-          <button type='submit' className="register-button">Register</button>
-        </form>
+              <button type='submit' className="register-button">Register</button>
+            </form>
+          </>
+        )}
       </div>
+      
     </div>
   )
 }

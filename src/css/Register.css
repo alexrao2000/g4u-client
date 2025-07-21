@@ -24,10 +24,10 @@
 .register-title {
   text-align: center;
   color: #333;
-  margin-bottom: 2rem;
-  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
   font-weight: 800;
-  line-height: 2;
+  line-height: 1.5;
   background: linear-gradient(135deg, #667eea, #764ba2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
