@@ -7,7 +7,6 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/auth" element={<Register />}/>
       <Route path="/referral" element={<Referral />}/>
       <Route path="/register" element={<Register />}/>
     </Routes>
