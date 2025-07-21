@@ -15,7 +15,7 @@ function Register() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(password, email) // DELETE THIS ONCE BACKEND IS IMPLEMENTED
-    register(password, email)
+    register(email, password)
   }
 
   return (
