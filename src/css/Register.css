@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  min-width: 20vw; /* Assures that container can't be narrower than the form, idk if the best solution, could be relative to form instead */
+  min-width: 500px; /* Assures that container can't be narrower than the form, idk if the best solution, could be relative to form instead */
   width: fit-content;
   padding: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
