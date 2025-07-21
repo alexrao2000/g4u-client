@@ -1,4 +1,3 @@
-import 'react';
 import { useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import '../css/Register.css';
