@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getReferralCode } from '../api/referral';
+import { getReferralCode } from '../api/referralApi';
 import '../css/Home.css';
 //import { useNavigate } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSearchParams } from "react-router-dom";
 import '../css/Register.css';
 
-import { register } from '../api/auth';
+import { register } from '../api/authApi';
 
 function Register() {
   const [searchParams] = useSearchParams();
