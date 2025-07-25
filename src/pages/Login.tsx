@@ -1,75 +1,59 @@
 import '../css/Register.css';
 
 import { useState } from 'react';
-import { useSearchParams } from "react-router-dom";
-
 import { useAuth } from '../contexts/AuthContext';
 
-import { register } from '../api/authApi';
+import { login } from '../api/authApi';
 
-function Register() {
+function Login() {
 
   const { accessToken, setAccessToken } = useAuth();
-
-  const [searchParams] = useSearchParams();
-  const referralCode = searchParams.get('ref');
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const [emailError, setEmailError] = useState<string>("")
+  const [loginError, setLoginError] = useState<string>("")
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-
-      const newAccessToken = await register(email, password)
+      const newAccessToken = await login(email, password);
       if (!accessToken) {
-        setAccessToken(newAccessToken)
-        setSubmitted(prev => !prev)
+        setAccessToken(newAccessToken);
+        setSubmitted(prev => !prev);
       } else {
-        console.log("Already logged in (accessToken exists).")
+        console.log("Already logged in (accessToken exists).");
+        setLoginError("Already logged in. Please log out first to switch accounts.");
       }
-
     } catch (err: any) {
-
-      setEmailError("");
+      setLoginError("");
       setTimeout(() => {
-        setEmailError(err.response?.data?.detail);
-        setTimeout(() => setEmailError(""), 5000);
+        setLoginError(err.response?.data?.detail || err.message || "Login failed");
+        setTimeout(() => setLoginError(""), 5000);
       }, 100);
-
     }
-
   }
 
   return (
     <div className="register-container">
       <div className="register-form">
-
         {submitted ? (
-
-          <h1 className="register-title">{accessToken ? "You're already logged in!" : "Thank you for signing up!"}</h1>
-
+          <h1 className="register-title"> Welcome back!</h1>
         ) : (
           <>
-            <h1 className="register-title">Sign Up</h1>
-            {referralCode && 
-              <h2 className="register-code">Your Referral Code is: {referralCode}</h2>
-            }
-
-            <form onSubmit={handleRegister}>
+            <h1 className="register-title">Log In</h1>
+            <form onSubmit={handleLogin}>
               <div className="form-group">
                 <input 
                   className="form-input"
                   type="email"
                   placeholder='Email'
                   value={email}
-                  onChange={e => setEmail(e.target.value) /* we need to look at this */}
+                  onChange={e => setEmail(e.target.value)}
                   required
                 />
-                {emailError ? (<p className="form-error">{emailError}</p>) : <div className="form-gap" />}
+                {loginError ? (<p className="form-error">{loginError}</p>) : <div className="form-gap" />}
               </div>
 
               <div className="form-group">
@@ -83,15 +67,13 @@ function Register() {
                 />
               </div>
 
-              <button type='submit' className="register-button">Register</button>
+              <button type='submit' className="register-button">Login</button>
             </form>
           </>
         )}
-
       </div>
-      
     </div>
   )
 }
 
-export default Register;
+export default Login; 

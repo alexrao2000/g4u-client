@@ -5,7 +5,14 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <button onClick={() => navigate('/register')}>Sign Up</button>
+    <div>
+      <button onClick={() => navigate('/login')}>
+        Login
+      </button>
+      <button onClick={() => navigate('/register')}>
+        Sign Up
+      </button>
+    </div>
   );
 
 }
