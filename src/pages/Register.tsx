@@ -8,11 +8,11 @@ function Register() {
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get('ref');
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
 
-  const [emailError, setEmailError] = useState<string>('')
+  const [emailError, setEmailError] = useState<string>("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +22,10 @@ function Register() {
       setSubmitted(prev => !prev)
     } catch (err: any) {
       setEmailError("");
-      setTimeout(() => setEmailError(err.response?.data?.detail), 100);
+      setTimeout(() => {
+        setEmailError(err.response?.data?.detail);
+        setTimeout(() => setEmailError(""), 5000);
+      }, 100);
     }
 
   }
@@ -50,7 +53,7 @@ function Register() {
                   onChange={e => setEmail(e.target.value) /* we need to look at this */}
                   required
                 />
-                {emailError ? (<p style={{color: 'red', maxHeight: "1em"}}>{emailError}</p>) : <div className="form-gap" />}
+                {emailError ? (<p className="form-error">{emailError}</p>) : <div className="form-gap" />}
               </div>
 
               <div className="form-group">

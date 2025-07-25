@@ -78,8 +78,13 @@
 .form-gap {
   display: block;
   width: 1em;
-  height: 2em;
+  height: 1.5em;
   unicode-bidi: isolate;
+}
+
+.form-error {
+  color: red;
+  max-height: 0.5em;
 }
 
 .register-button {
