@@ -7,7 +7,8 @@ export const register = async (email: string, password: string): Promise<string>
       email: email, 
       password: password
     });
-    return response.data;
+    const accessToken = response.data.accessToken
+    return accessToken;
   } catch (err: any) {
 
     throw err

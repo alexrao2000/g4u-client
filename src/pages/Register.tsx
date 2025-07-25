@@ -1,10 +1,16 @@
+import '../css/Register.css';
+
 import { useState } from 'react';
 import { useSearchParams } from "react-router-dom";
-import '../css/Register.css';
+
+import { useAuth } from '../contexts/AuthContext';
 
 import { register } from '../api/authApi';
 
 function Register() {
+
+  const { accessToken, setAccessToken } = useAuth();
+
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get('ref');
 
@@ -14,18 +20,26 @@ function Register() {
 
   const [emailError, setEmailError] = useState<string>("")
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await register(email, password)
-      console.log(data)
+
+      const newAccessToken = await register(email, password)
+      if (!accessToken) {
+        setAccessToken(newAccessToken)
+      } else {
+        console.log("Already logged in (accessToken exists).")
+      }
       setSubmitted(prev => !prev)
+
     } catch (err: any) {
+
       setEmailError("");
       setTimeout(() => {
         setEmailError(err.response?.data?.detail);
         setTimeout(() => setEmailError(""), 5000);
       }, 100);
+
     }
 
   }
@@ -43,7 +57,7 @@ function Register() {
               <h2 className="register-code">Your Referral Code is: {referralCode}</h2>
             }
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleRegister}>
               <div className="form-group">
                 <input 
                   className="form-input"
