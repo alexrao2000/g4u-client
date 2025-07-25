@@ -75,6 +75,13 @@
   font-weight: 400;
 }
 
+.form-gap {
+  display: block;
+  width: 1em;
+  height: 2em;
+  unicode-bidi: isolate;
+}
+
 .register-button {
   width: 100%;
   padding: 1rem;

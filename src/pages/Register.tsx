@@ -12,11 +12,18 @@ function Register() {
   const [password, setPassword] = useState<string>('');
   const [submitted, setSubmitted] = useState<boolean>(false);
 
+  const [emailError, setEmailError] = useState<string>('')
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const data = await register(email, password)
-    console.log(data)
-    setSubmitted(prev => !prev)
+    try {
+      const data = await register(email, password)
+      console.log(data)
+      setSubmitted(prev => !prev)
+    } catch (err: any) {
+      setEmailError("");
+      setTimeout(() => setEmailError(err.response?.data?.detail), 100);
+    }
 
   }
 
@@ -43,6 +50,7 @@ function Register() {
                   onChange={e => setEmail(e.target.value) /* we need to look at this */}
                   required
                 />
+                {emailError ? (<p style={{color: 'red', maxHeight: "1em"}}>{emailError}</p>) : <div className="form-gap" />}
               </div>
 
               <div className="form-group">
