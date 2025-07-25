@@ -16,10 +16,14 @@ export const register = async (email: string, password: string): Promise<string>
 }
 
 export const login = async (email: string, password: string): Promise<string> => {
-  const response = await axios.post(`${baseUrl}/auth/login`, {
-    email: email,
-    password: password
-  });
-  const accessToken = response.data.accessToken;
-  return accessToken;
+  try {
+    const response = await axios.post(`${baseUrl}/auth/login`, {
+      email: email,
+      password: password
+    });
+    const accessToken = response.data.accessToken;
+    return accessToken;
+  } catch (err: any) {
+    throw err
+  }
 }
